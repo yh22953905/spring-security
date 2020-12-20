@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+// DaoAuthenticationProvider(ProviderManager -> AbstractUserDetailsAuthenticationProvider)
+// 에서 UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username); 할 때 UserDetailsService 의 구현체를 가져온다.
 public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
