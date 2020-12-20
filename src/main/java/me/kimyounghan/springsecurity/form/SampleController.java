@@ -1,4 +1,4 @@
-package me.kimyounghan.springsecurity;
+package me.kimyounghan.springsecurity.form;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
