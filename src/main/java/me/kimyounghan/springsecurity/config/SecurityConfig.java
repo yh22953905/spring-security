@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 // @EnableWebSecurity // annotation 추가하지 않아도 security 자동 설정이 설정해준다.
 // filter chain을 만들 때 사용된다.
-@Order(Ordered.LOWEST_PRECEDENCE - 100)
+@Order(Ordered.LOWEST_PRECEDENCE - 50)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
