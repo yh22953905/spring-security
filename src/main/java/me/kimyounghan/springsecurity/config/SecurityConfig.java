@@ -12,6 +12,7 @@ import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 
@@ -62,10 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
 //                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 불필요하게 filter chain 을 다 거쳐야 함.
                 .anyRequest().authenticated()
 //                .accessDecisionManager(accessDecisionManager())
-                .expressionHandler(securityExpressionHandler())
-        ;
+                .expressionHandler(securityExpressionHandler());
         http.formLogin();
         http.httpBasic();
+
+        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 
     // 인증, 인가가 필요하지 않은 요청

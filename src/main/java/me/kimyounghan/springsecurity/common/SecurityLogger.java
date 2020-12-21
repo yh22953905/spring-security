@@ -9,10 +9,12 @@ public class SecurityLogger {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
 
+        System.out.println(message);
         System.out.println("==========");
-        System.out.println(Thread.currentThread().getName());
-        System.out.println(principal);
+        System.out.println("Thread : " + Thread.currentThread().getName());
+        System.out.println("Principal : " + principal);
         System.out.println("==========");
+        System.out.println();
     }
 
 }
