@@ -28,6 +28,7 @@ import java.util.List;
 @Order(Ordered.LOWEST_PRECEDENCE - 50)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    // 인가 : FilterChainProxy -> FilterSecurityInterceptor(filter) -> AbstractSecurityInterceptor -> accessDecisionManager.decide)
     public AccessDecisionManager accessDecisionManager() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
         roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
