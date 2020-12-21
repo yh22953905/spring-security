@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
         return handler;
     }
 
+    // 인증, 인가가 필요한 요청
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -58,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
                 .mvcMatchers("/", "/info", "/account/**").permitAll()
                 .mvcMatchers("/user").hasRole("USER")
                 .mvcMatchers("/admin").hasRole("ADMIN")
+//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 불필요하게 filter chain 을 다 거쳐야 함.
                 .anyRequest().authenticated()
 //                .accessDecisionManager(accessDecisionManager())
                 .expressionHandler(securityExpressionHandler())
@@ -66,9 +68,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
         http.httpBasic();
     }
 
+    // 인증, 인가가 필요하지 않은 요청
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()); // filter chain 을 거치지 않아도 됨.
     }
 
 //    인메모리 유저 추가
