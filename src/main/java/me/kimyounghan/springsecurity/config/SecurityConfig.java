@@ -22,11 +22,14 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.List;
 
+// 스프링 시큐리티 아키텍처 참고
+// https://spring.io/guides/topicals/spring-security-architecture
+// https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/htmlsingle/#overall-architecture
 @Configuration
 // @EnableWebSecurity // annotation 추가하지 않아도 security 자동 설정이 설정해준다.
-// filter chain을 만들 때 사용된다.
+// filter chain 을 만들 때 사용된다.
 @Order(Ordered.LOWEST_PRECEDENCE - 50)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurityConfigurerAdapter : WebSecurity 를 만들어 filter chain 을 만드는 클래스
 
     // 인가 : FilterChainProxy -> FilterSecurityInterceptor(filter) -> AbstractSecurityInterceptor -> accessDecisionManager.decide)
     // ExceptionTranslationFilter -> AuthenticationException, AccessDeniedException / UsernamePasswordAuthenticationFilter 의 인증 에러는 별도 처리
