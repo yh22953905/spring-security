@@ -48,4 +48,10 @@ public class SampleController {
         return "info";
     }
 
+    @GetMapping("/user")
+    public String user(Model model, Principal principal) {
+        model.addAttribute("message", "Hello User, " + principal.getName());
+        return "user";
+    }
+
 }
