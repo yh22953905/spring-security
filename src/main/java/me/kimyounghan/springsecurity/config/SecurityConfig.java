@@ -60,12 +60,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
                 .mvcMatchers("/", "/info", "/account/**", "/signup").permitAll()
                 .mvcMatchers("/user").hasRole("USER")
                 .mvcMatchers("/admin").hasRole("ADMIN")
-//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 불필로그아웃 처리 필터: LogoutFi게 filter chain 을 다 거쳐야 함.
+//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 불필요한 로그아웃 처리 필터: filter chain 을 다 거쳐야 함.
                 .anyRequest().authenticated()
 //                .accessDecisionManager(accessDecisionManager())
-                .expressionHandler(securityExpressionHandler());
-        http.formLogin();
+                .expressionHandler(securityExpressionHandler())
+        ;
+
+        http.formLogin()
+//            .usernameParameter("my-username") // 파라미터명 : input 태그의 name
+//            .usernameParameter("my-password") // 파라미터명 : input 태그의 password
+            .loginPage("/login") // DefaultLoginGeneratingFilter / DefaultLogoutPageGeneratingFilter 가 등록되지 않는다.
+        ;
+
         http.httpBasic();
+
 //        http.csrf().disable(); // form 기반의 인증에서는 반드시 사용하는 게 좋다. REST API 의 경우 csrf 토큰을 매번 보내주는 게 번거로울 수 있기 때문에 disabled 시키고 사용할 수 있다.
 
         http.logout()
