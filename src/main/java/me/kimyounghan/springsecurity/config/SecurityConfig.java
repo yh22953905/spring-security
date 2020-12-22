@@ -62,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
     // 인증, 인가가 필요한 요청
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        AccessDecisionManager
         http
                 .authorizeRequests()
                 .mvcMatchers("/", "/info", "/account/**", "/signup").permitAll()
