@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/", "/info", "/account/**").permitAll()
+                .mvcMatchers("/", "/info", "/account/**", "/signup").permitAll()
                 .mvcMatchers("/user").hasRole("USER")
                 .mvcMatchers("/admin").hasRole("ADMIN")
 //                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 불필요하게 filter chain 을 다 거쳐야 함.
