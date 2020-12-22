@@ -1,5 +1,7 @@
 package me.kimyounghan.springsecurity.config;
 
+import lombok.RequiredArgsConstructor;
+import me.kimyounghan.springsecurity.account.AccountService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -33,7 +35,10 @@ import java.util.List;
 // @EnableWebSecurity // annotation 추가하지 않아도 security 자동 설정이 설정해준다.
 // filter chain 을 만들 때 사용된다.
 @Order(Ordered.LOWEST_PRECEDENCE - 50)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurityConfigurerAdapter : WebSecurity 를 만들어 filter chain 을 만드는 클래스
+
+    private final AccountService accountService;
 
     // 인가 : FilterChainProxy -> FilterSecurityInterceptor(filter) -> AbstractSecurityInterceptor -> accessDecisionManager.decide)
     // ExceptionTranslationFilter -> AuthenticationException, AccessDeniedException / UsernamePasswordAuthenticationFilter 의 인증 에러는 별도 처리
@@ -80,6 +85,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
             .loginPage("/login") // DefaultLoginGeneratingFilter / DefaultLogoutPageGeneratingFilter 가 등록되지 않는다.
             .permitAll()
         ;
+
+        http.rememberMe()
+//                .tokenValiditySeconds() // remember-me token 유효기간
+//                .useSecureCookie() // https 만 쿠키에 접근 가능
+//                .alwaysRemember()
+                .userDetailsService(accountService)
+                .key("remember-me-sample");
 
         http.httpBasic(); // BasicAuthenticationFilter : HTTP 스펙의 Basic 인증, 요청 헤더에 username 과 password 가 드러나 보안에 취약하기 때문에 HTTPS 사용이 권장됨.
 
