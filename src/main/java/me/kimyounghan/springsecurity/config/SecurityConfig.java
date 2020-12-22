@@ -86,6 +86,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
 //                .deleteCookies() // cookie 의 이름
         ;
 
+//        http.anonymous().principal("anonymousUser"); // AnonymousAuthenticationFilter
+
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 
