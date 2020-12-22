@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
 
         http.logout()
 //                .logoutUrl("/logout") // logout post url
-//                .logoutSuccessUrl("/") // default : "/login"
+                .logoutSuccessUrl("/") // default : "/login"
 //                .addLogoutHandler()
 //                .logoutSuccessHandler()
 //                .invalidateHttpSession(true) // default : true
@@ -87,6 +87,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
         ;
 
 //        http.anonymous().principal("anonymousUser"); // AnonymousAuthenticationFilter
+
+        http.sessionManagement().sessionFixation() // SessionManagementFilter
+                .changeSessionId() // Servlet 3.1 이상
+//                .migrateSession() // Servlet 3.0 이하
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false)
+       ;
 
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
