@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
             .permitAll()
         ;
 
-        http.httpBasic();
+        http.httpBasic(); // BasicAuthenticationFilter : HTTP 스펙의 Basic 인증, 요청 헤더에 username 과 password 가 드러나 보안에 취약하기 때문에 HTTPS 사용이 권장됨.
 
 //        http.csrf().disable(); // form 기반의 인증에서는 반드시 사용하는 게 좋다. REST API 의 경우 csrf 토큰을 매번 보내주는 게 번거로울 수 있기 때문에 disabled 시키고 사용할 수 있다.
 
