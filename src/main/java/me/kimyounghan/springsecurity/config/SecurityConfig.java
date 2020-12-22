@@ -2,6 +2,7 @@ package me.kimyounghan.springsecurity.config;
 
 import lombok.RequiredArgsConstructor;
 import me.kimyounghan.springsecurity.account.AccountService;
+import me.kimyounghan.springsecurity.common.LoggingFilter;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
     // 인증, 인가가 필요한 요청
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(new LoggingFilter(), WebAsyncManagerIntegrationFilter.class);
+
 //        AccessDecisionManager
         http
                 .authorizeRequests()
