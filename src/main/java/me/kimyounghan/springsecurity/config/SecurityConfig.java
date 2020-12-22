@@ -70,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
 //            .usernameParameter("my-username") // 파라미터명 : input 태그의 name
 //            .usernameParameter("my-password") // 파라미터명 : input 태그의 password
             .loginPage("/login") // DefaultLoginGeneratingFilter / DefaultLogoutPageGeneratingFilter 가 등록되지 않는다.
+            .permitAll()
         ;
 
         http.httpBasic();
@@ -78,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // WebSecurit
 
         http.logout()
 //                .logoutUrl("/logout") // logout post url
-                .logoutSuccessUrl("/")
+//                .logoutSuccessUrl("/") // default : "/login"
 //                .addLogoutHandler()
 //                .logoutSuccessHandler()
 //                .invalidateHttpSession(true) // default : true
